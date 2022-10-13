@@ -37,7 +37,11 @@ function showEntrance() {
 	let apartment = parseInt(prompt("Hi, what's the apartment number?", 1));
 	let entrance = Math.ceil(apartment / apartmentsPerEntrance);
 
-	alert(`This is the entrance number ${entrance}.`);
+	if (entrance <= entrances) {
+		alert(`This is the entrance number ${entrance}.`);
+	} else {
+		alert("There is no such apartment in the house.");
+	}
 }
 
 showEntrance();
