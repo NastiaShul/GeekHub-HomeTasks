@@ -390,8 +390,10 @@ body {
     margin: 0 56px 0 0;
   }
 }
-.block-chart:not(:last-child) {
-  margin: 0 0 15px 0;
+@media (max-width: 700px) {
+  .block-chart:not(:last-child) {
+    margin: 0 0 15px 0;
+  }
 }
 .block-chart__img {
   position: relative;
