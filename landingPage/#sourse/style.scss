@@ -278,8 +278,10 @@ background-color: #F3FFF9;
 			margin: 0 56px 0 0;
 		}
 	}
-	&:not(:last-child){
-		margin: 0 0 15px 0;
+	@media (max-width: 700px) {
+		&:not(:last-child){
+			margin: 0 0 15px 0;
+		}
 	}
 	&__img {
 		position: relative;
