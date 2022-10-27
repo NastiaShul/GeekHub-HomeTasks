@@ -33,23 +33,19 @@ function reverseString(argument) {
 // b. Якщо передали не число. Помилка return new Error(“Please provide a valid number”);
 // c. Далі функція генерує рандомне число від 1 до 10 і якщо задане число правильне повертає стрінгу ‘You Win!’, якщо не правильно ‘You are lose, your number is 8, the random number is 5’
 
-function GuessTheNumber() {
-	const randomNumber = Math.floor(Math.random() * 10) + 1,
-		num = +prompt("Try to guess, what number am I thinking of?");
+function GuessTheNumber(num) {
+	const randomNumber = Math.floor(Math.random() * 10) + 1;
 
 	if (num < 1 || num > 10) {
-		alert("Please, provide number in range from 1 to 10.");
+		return "Please, provide number in range from 1 to 10.";
 	} else if (!Number.isInteger(num)) {
-		alert("Please, provide a valid number.");
+		return "Please, provide a valid number.";
 	} else if (randomNumber === num) {
-		alert("You Win!");
+		return "You Win!";
 	} else {
-		alert(`You are lose, your number is ${num}, the random number is ${randomNumber}.`);
+		return `You are lose, your number is ${num}, the random number is ${randomNumber}.`;
 	}
-
 }
-
-//GuessTheNumber();
 
 //4. Є масив чисел (додатних, відʼємних, і впереміш). Потрібно знайти min, max, sum. Не можна використовувати методи масивів або обʼєкту Math, а тільки цикли for і while. Приклади масивів:
 // [3,0,-5,1,44,-12,3,0,0,1,2,-3,-3,2,1,4,-2-3-1]
