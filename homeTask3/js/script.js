@@ -5,11 +5,11 @@
 // - Перша функція приймає масив і колбек
 // - Друга функція (колбек) обробляє кожен елемент масиву (для кожної функції свій колбек)
 
-function validCallbackName(arr, callback) {
+function mainFunction(arr, callback) {
 	return callback(arr)
 }
 function upperFirstLetter(arr) {
-	return arr.reduce((prev, item) => prev += item.charAt(0).toUpperCase() + item.slice(1))
+	return arr.map(item => item.replace(item[0], item[0].toUpperCase())).join('');
 }
 
 function multiplyTen(arr) {
@@ -24,6 +24,10 @@ function reverse(arr) {
 	return arr.map(item => item.split("").reverse().join("")).join(", ");
 }
 
+console.log(mainFunction(['my', 'name', 'is', 'Vasya'], upperFirstLetter));
+console.log(mainFunction([10, 20, 30], multiplyTen));
+console.log(mainFunction([{ age: 45, name: 'John' }, { age: 20, name: 'Aaron' }], dataBase));
+console.log(mainFunction(['abc', '123'], reverse));
 
 //3 this
 //3.1 Створити об'єкт який описує ширину і висоту прямокутника, а також вираховує площу фігури
@@ -84,8 +88,8 @@ let convertToObject = num => {
 
 //5 Замикання 
 //5.1 
-function minus(x) {
-	return function (y) {
+function minus(x = 1) {
+	return function (y = 1) {
 		if (typeof x === "undefined") {
 			x = 0;
 		}
@@ -111,12 +115,12 @@ const multiply = multiplyMaker(2);
 let createStr = function (str) {
 	return {
 		setStr: function (newStr) {
-			str = newStr;
 			if (typeof newStr === "number") {
 				str = "" + newStr;
-			}
-			if (typeof newStr === "undefined") {
+			} else if (typeof newStr === "undefined") {
 				str = "";
+			} else {
+				str = newStr;
 			}
 		},
 
@@ -178,9 +182,9 @@ let calc = (() => {
 
 //6 Реалізувати функцію sum.
 
-function sum(a) {
-	return function (b) {
-		return function (c) {
+function sum(a = 1) {
+	return function (b = 1) {
+		return function (c = 1) {
 			return a + b + c;
 		}
 	}
