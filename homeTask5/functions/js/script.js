@@ -54,7 +54,15 @@ function reverse(str) {
 
 // 2.6 indexOf - Implement the indexOf function for arrays.
 function indexOfElement(arr, elem) {
-	const index = arr.indexOf(elem);
+	let index;
+	if (!arr.includes(elem)) {
+		index = -1;
+	}
+	for (let i = 0; i < arr.length; i++) {
+		if (arr[i] == elem) {
+			index = i;
+		} 
+	}
 	return index;
 }
 
