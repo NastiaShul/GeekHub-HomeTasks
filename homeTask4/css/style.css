@@ -296,8 +296,8 @@ button {
   }
 }
 .text[contentEditable] {
-  border: 1px dotted #d1959d;
-  border-radius: 10px;
+  border: 1px solid #777272;
+  border-radius: 8px;
   padding: 10px;
 }
 
@@ -311,10 +311,43 @@ button {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  position: relative;
 }
 
 .edit {
   margin: 0 10px 0 0;
+}
+
+.confirm {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #38404B;
+  border: 1px solid #777272;
+  border-radius: 8px;
+  width: 100px;
+  display: none;
+}
+.confirm button {
+  padding: 10px;
+}
+.confirm h3 {
+  padding: 10px;
+  color: #777272;
+}
+.confirm__yes {
+  color: #a6dbad;
+}
+.confirm__no {
+  color: #b36e6e;
+}
+
+.active {
+  display: block;
+}
+
+.hide {
+  display: none;
 }
 
 .completed {
@@ -330,17 +363,10 @@ button {
           align-items: center;
   color: #777272;
   font-size: 14px;
-  margin: 0 0 5px 5px;
-}
-.sort h3 {
-  margin: 0 7px 0 0;
-  font-weight: 700;
+  margin: 0 0 7px 5px;
 }
 .sort button {
-  color: #777272;
-}
-.sort button:not(:last-child) {
-  margin: 0 5px 0 0;
+  color: #94ADCF;
 }
 
 .selected {

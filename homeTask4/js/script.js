@@ -19,6 +19,7 @@ function addNote(e) {
 	const date = new Date().toUTCString().slice(0, -4),
 		value = document.querySelector(".new-task__input").value;
 
+
 	if (input.value !== "") {
 		const id = taskList.length;
 		const uncheckedTasks = taskList.filter(task => !task.checked);
@@ -38,11 +39,12 @@ function addNote(e) {
 
 function handleTasks(e) {
 	const taskBlock = document.querySelectorAll(".task__block"),
-		text = document.querySelectorAll(".text");
+		text = document.querySelectorAll(".text"),
+		confirm = document.querySelectorAll(".confirm");
 	for (let i = 0; i < taskBlock.length; i++) {
 		taskBlock[i].addEventListener("click", (e) => {
 			const checkMark = e.target,
-			id = +checkMark.parentNode.parentNode.id;
+				id = +checkMark.parentNode.parentNode.id;
 
 			if (checkMark.classList.contains("check")) {
 				taskList = taskList.map((task) => {
@@ -51,27 +53,29 @@ function handleTasks(e) {
 					}
 					return task;
 				});
-				taskList.sort((taskA, taskB) => {
-					return taskA.checked - taskB.checked;
-				});
-
+				// taskList.sort((taskA, taskB) => {
+				// 	return taskA.checked - taskB.checked;
+				// });
 				const text = checkMark.nextElementSibling;
 				checkMark.classList.toggle("checked");
 				text.classList.toggle("completed");
 
-			} else if (checkMark.classList.contains("delete")) {
-				const indexDeleted = taskList.findIndex(task => task.id === id);
-				taskList.splice(indexDeleted, 1);
-				checkMark.parentNode.parentNode.parentNode.parentNode.remove();
-
 			} else if (checkMark.classList.contains("edit")) {
 				text[i].setAttribute("contentEditable", true);
 				text[i].addEventListener("input", (e) => changeText(e, i), false);
+
+			} else if (checkMark.classList.contains("delete")) {
+				confirm[i].classList.add("active");
+			} else if (checkMark.classList.contains("confirm__yes")) {
+				const indexDeleted = taskList.findIndex(task => task.id === id);
+				taskList.splice(indexDeleted, 1);
+				checkMark.parentNode.parentNode.parentNode.parentNode.remove();
+			} else if (checkMark.classList.contains("confirm__no")) {
+				confirm[i].classList.remove("active");
 			}
 		})
 	}
 }
-
 
 function changeText(e, index) {
 	const target = e.target,
@@ -94,7 +98,7 @@ function sortTasks(e) {
 	const target = e.target,
 		uncheckedTasks = taskList.filter(task => !task.checked),
 		checkedTasks = taskList.filter(task => task.checked);
-	if (target.classList.contains("sort-name")) {
+	if (target.classList.contains("sort-name__up")) {
 		uncheckedTasks.sort((taskA, taskB) => {
 			return taskA.value.localeCompare(taskB.value)
 		});
@@ -102,9 +106,25 @@ function sortTasks(e) {
 		createTask();
 		addDropEvent();
 		handleTasks();
-	} else if (target.classList.contains("sort-date")) {
+	} else if (target.classList.contains("sort-name__down")) {
+		uncheckedTasks.sort((taskA, taskB) => {
+			return taskB.value.localeCompare(taskA.value)
+		});
+		taskList = [].concat(uncheckedTasks).concat(checkedTasks);
+		createTask();
+		addDropEvent();
+		handleTasks();
+	} else if (target.classList.contains("sort-date__up")) {
 		uncheckedTasks.sort((taskA, taskB) => {
 			return new Date(taskA.date) - new Date(taskB.date);
+		});
+		taskList = [].concat(uncheckedTasks).concat(checkedTasks);
+		createTask();
+		addDropEvent();
+		handleTasks();
+	} else if (target.classList.contains("sort-date__down")) {
+		uncheckedTasks.sort((taskA, taskB) => {
+			return new Date(taskB.date) - new Date(taskA.date);
 		});
 		taskList = [].concat(uncheckedTasks).concat(checkedTasks);
 		createTask();
@@ -131,6 +151,11 @@ function createTask() {
 					<div class="btns">
 						<button><img class="edit" src="./img/edit.svg" alt=""></button>
 						<button><img class="delete" src="./img/Plus.svg" alt=""></button>
+						<div class="confirm">
+							<h3>delete?</h3>
+							<button class="confirm__yes">Yes</button>
+							<button class="confirm__no">No</button>
+						</div>
 					</div>
 				</div>
 		</div>

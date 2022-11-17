@@ -158,9 +158,10 @@ button{
 		font-size: 12px;
 	}
 	&[contentEditable]{
-		border: 1px dotted #d1959d;
-		border-radius: 10px;
-		padding: 10px;	
+		border: 1px solid $neutral-color;
+		border-radius: 8px;
+		padding: 10px;
+		
 	}
 }
 
@@ -168,12 +169,45 @@ button{
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	position: relative;
 
 }
 .edit {
 	margin: 0 10px 0 0;
 }
 .delete {
+}
+
+.confirm {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: $base-color;
+	border: 1px solid $neutral-color;
+	border-radius: 8px;
+	width: 100px;
+	button{
+		padding: 10px;
+	}
+	h3{
+		padding: 10px;
+		color: $neutral-color;
+	}
+		&__yes {
+			color: #a6dbad;
+		}
+
+		&__no {
+			color: #b36e6e;
+		}
+		display: none;
+}
+
+.active{
+	display: block;
+}
+.hide{
+	display: none;
 }
 
 .completed{
@@ -185,16 +219,9 @@ button{
 	align-items: center;
 	color: $neutral-color;
 	font-size: 14px;
-	margin: 0 0 5px 5px;
-	& h3{
-		margin: 0 7px 0 0;
-		font-weight: 700;
-	}
+	margin: 0 0 7px 5px;
 	button{
-		color: $neutral-color;
-		&:not(:last-child){
-			margin: 0 5px 0 0;
-		}
+		color: $light-color;
 	}
 }
 
