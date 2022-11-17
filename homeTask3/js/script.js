@@ -88,14 +88,8 @@ let convertToObject = num => {
 
 //5 Замикання 
 //5.1 
-function minus(x = 1) {
-	return function (y = 1) {
-		if (typeof x === "undefined") {
-			x = 0;
-		}
-		if (typeof y === "undefined") {
-			y = 0;
-		}
+function minus(x = 0) {
+	return function (y = 0) {
 		return x - y;
 	}
 }
@@ -182,9 +176,9 @@ let calc = (() => {
 
 //6 Реалізувати функцію sum.
 
-function sum(a = 1) {
-	return function (b = 1) {
-		return function (c = 1) {
+function sum(a = 0) {
+	return function (b = 0) {
+		return function (c = 0) {
 			return a + b + c;
 		}
 	}
