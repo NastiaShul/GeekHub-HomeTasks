@@ -1,14 +1,13 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
-	
+
 	async function getResource(url) {
 		const res = await fetch(url);
-
+		
 		if (!res.ok) {
 			throw new Error(`Could not fetch ${url}, status: ${res.status}`);
-		}
-
+		} 
 		return await res.json();
 	}
 
@@ -16,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		.then(data => createProfile(data));
 
 	function createProfile(data) {
-		console.log(data);
+		console.log("profle data", data);
 		const profileContainer = document.querySelector(".my-profile__container");
 		profileContainer.innerHTML = `
 		<h3 class="my-profile__name">${data.name}</h3>
@@ -25,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		<div class="my-profile__contacts contacts">
 			<div class="contacts__email">
 				<img src="./img/email.svg" alt="email">
-				<a href="maito:shulhaevich@gmail.com">shulhaevich@gmail.com</a>
+				<a href="maito:${data.email}">${data.email}</a>
 			</div>
 			<div class="contacts__social">
 				<img src="./img/link.svg" alt="link">
@@ -40,23 +39,26 @@ document.addEventListener("DOMContentLoaded", () => {
 	const reposBtn = document.getElementById("load"),
 		reposTittle = document.querySelector(".repos__tittle"),
 		reposRow = document.querySelector(".repos__row"),
-		loadStatus = document.createElement("img"),
-		loading = "img/spinner.svg";
+		loadStatus = document.querySelector(".spinner"),
+		loading = document.querySelector(".spinner img");
 
-	getResource("https://api.github.com/users/nastyashul/repos")
-		.then(data => {
-			reposBtn.addEventListener("click", () => {
-
-				loadStatus.src = loading;
-				reposRow.insertAdjacentElement("beforeBegin", loadStatus);
-
+		reposBtn.addEventListener("click", () => {
+			loadStatus.src = loading;
+			reposRow.insertAdjacentElement("beforeBegin", loadStatus);
+			getResource("https://api.github.com/users/nastyashul/repos")
+			.then(data => {
+				console.log(data);
 				return loadRepos(data);
-			});
-		})
+			})
+			.finally(() => {
+				reposBtn.classList.add("hide");
+				reposTittle.classList.remove("hide");
+				loadStatus.classList.add("hide");
+			})
+		});
 
 
 	function loadRepos(data) {
-
 		const dataForRepo = data.map(item => {
 			const repoBlock = `
 			<div class="repos__item repo">
@@ -70,10 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			return repoBlock;
 		})
 		reposRow.insertAdjacentHTML('afterbegin', dataForRepo.join(' '));
-
-		reposBtn.classList.add("hide");
-		reposTittle.classList.remove("hide");
-		loadStatus.classList.add("hide");
 	}
 });
 
