@@ -1,0 +1,12 @@
+body{
+	background-color: #e7dddd;
+	color: #38404B;
+	font-size: 15px;
+}
+.palette{
+	padding: 100px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
