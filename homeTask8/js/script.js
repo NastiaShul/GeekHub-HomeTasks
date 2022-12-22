@@ -1,35 +1,27 @@
 
-const form = document.querySelector("form"),
+const form = () => {
+	const form = document.querySelector("form"),
 	firstName = document.querySelector(".first-name"),
 	lastName = document.querySelector(".last-name"),
 	phone = document.querySelector(".phone"),
 	email = document.querySelector(".email"),
 	password = document.querySelector(".password"),
-	confPassword = document.querySelector(".conf-password");
+	confPassword = document.querySelector(".conf-password"),
+	wrapper = document.querySelector(".wrapper"),
+	modal = document.querySelector(".modal"),
+	submitForm = document.querySelector(".modal-btn");
 
-const errorFirstName = document.getElementById("first-name__er"),
+const errors = document.querySelectorAll(".error"),
+	errorFirstName = document.getElementById("first-name__er"),
 	errorLastName = document.getElementById("last-name__er"),
 	errorPhone = document.getElementById("phone-name__er"),
 	errorEmail = document.getElementById("email__er"),
 	errorPassword = document.getElementById("password__er"),
 	errorConfPassword = document.getElementById("conf-password__er");
 
-form.addEventListener("submit", (e) => {
-	e.preventDefault();
-
-	validName(firstName, errorFirstName)
-	validName(lastName, errorLastName)
-	validPhone(phone, errorPhone)
-	validEmail(email, errorEmail)
-	validPassword(password, errorPassword)
-	validConfPassword();
-
-});
-
 const validName = (inputField, errorField) => {
 	const regexName = /^[A-Z]+[a-z]*\w{1,}$/g;
 	if (regexName.test(inputField.value)) {
-		console.log(inputField.value);
 		return true;
 	}
 	else if (inputField.value.match(/^[А-Я]+[а-я]*/g)) {
@@ -48,24 +40,38 @@ const validName = (inputField, errorField) => {
 
 const validPhone = (inputField, errorField) => {
 	const validNumber = inputField.value.replace(/\D/g, "");
-	const regexPhone = /^067|^068|^097|^096|^093|^063|^073|^099|^050+\d{10,12}$/;
-	if (regexPhone.test(validNumber)) {
-		console.log("Phone number: " + validNumber);
-		return true;
-	}
-	else if (!regexPhone.test(validNumber)) {
-		errorField.append("Invalid phone number");
-		return false;
-	}
+	if(validNumber.slice(0,2) !== "38"){
+		const regexPhone = /^067|^068|^097|^096|^093|^063|^073|^099|^050+\d{10,12}$/;
+		if (regexPhone.test(validNumber)) {
+			return true;
+		}
+		else {
+			errorField.append("Invalid phone number");
+			return false;
+		}
+	} else {
+		const regexPhone = /^38067|^38068|^38097|^38096|^38093|^38063|^38073|^38099|^38050+\d{10,12}$/;
+		if (regexPhone.test(validNumber)) {
+			return true;
+		}
+		else {
+			errorField.append("Invalid phone number");
+			return false;
+		}
+	}		
+};
+
+const formatPhoneNumber = (phone) => {
+	let number = phone.value.replace(/\D/g, "");
+	return number.slice(0, 2) !== "38" ? "38" + number : number
 };
 
 const validEmail = (inputField, errorField) => {
 	const regexEmail = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}/i;
 	if (regexEmail.test(inputField.value)) {
-		console.log("email: " + inputField.value);
 		return true;
 	}
-	else if (!inputField.value.match(regexEmail)) {
+	else {
 		errorField.append("Invalid email");
 		return false;
 	}
@@ -74,10 +80,13 @@ const validEmail = (inputField, errorField) => {
 const validPassword = (inputField, errorField) => {
 	const refexPassword = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$)(?=.*[()_\-\`\\/\"\'|\[\]}{:;%!?&#@^*'/>.<,]).{8,}$/;
 	if (refexPassword.test(inputField.value)) {
-		console.log("Password: true");
 		return true;
 	}
-	else if (!inputField.value.match(/^(?=.*[0-9])/g)) {
+	else if (inputField.value.match(/(?=.*[А-Я]+[а-я])/g)) {
+		errorField.append("The password should have only latin letters");
+		return false;
+	}
+	else if (!inputField.value.match(/(?=.*[0-9])/g)) {
 		errorField.append("The password should have even one of the digit");
 		return false;
 	}
@@ -97,10 +106,50 @@ const validPassword = (inputField, errorField) => {
 
 const validConfPassword = () => {
 	if (password.value === confPassword.value) {
-		console.log("Confirm password: true");
 		return true;
-	} else if (password.value !== confPassword.value) {
+	} else {
 		errorConfPassword.append("The confirmed password is  not matching");
 		return false;
 	}
 };
+
+
+
+form.addEventListener("submit", (e) => {
+	e.preventDefault();
+
+	errors.forEach(error => {
+		if(error.innerText){
+			error.innerText = "";
+		}
+	})
+
+	const isValidName = validName(firstName, errorFirstName);
+	const isValidLastName = validName(lastName, errorLastName);
+	const isValidPhone =  validPhone(phone, errorPhone)
+	const isValidEmail =  validEmail(email, errorEmail)
+	const isValidPassword =  validPassword(password, errorPassword)
+	const isValidConfPassword = validConfPassword();
+
+	if(isValidName && isValidLastName && isValidPhone && isValidEmail && isValidPassword && isValidConfPassword){
+		const formatedPhone = formatPhoneNumber(phone);
+		
+		wrapper.style.opacity = 0.2;
+		modal.classList.remove("hide");
+
+		console.log(firstName.value);
+		console.log(lastName.value);
+		console.log(formatedPhone);
+		console.log(email.value);
+	}
+});
+
+submitForm.addEventListener("click", () => {
+	form.reset();
+	wrapper.style.opacity = 1;
+	modal.classList.add("hide");
+});
+
+}
+
+form();

@@ -88,7 +88,7 @@ h6 {
 }
 /****************************/
 body{
-	background: #fafafa;
+	background: #c5c2c2;
 	height: 100%;
 	line-height: 1;
 	font-size: 14px;
@@ -129,24 +129,47 @@ label span{
 	flex-direction: column;
 }
 
-.first-name{
-}
-.last-name{
-}
-.phone {
-}
-.email {
-}
-.password {
-}
-.conf-password {
-}
-.submit-btn {
-	
-}
 .submit {
 	padding: 8px 15px;
 	border-radius: 10px;
 	background-color: transparent;
 	border: 1px solid #252b42;
+}
+
+.submit:hover, .submit:focus{
+	background-color: #ffffff;
+	border-color: #ffffff;
+}
+
+.modal{
+	flex-direction: column;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	z-index: 5;
+	overflow: hidden;
+	transform: translate(-50%,-50%);
+	width: 250px;
+	height: 150px;
+	border-radius: 10px;
+	background: #fafafa;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+}
+
+.modal-btn{
+	background-color: #c5c2c2;
+	border-radius: 10px;
+	padding: 10px 20px;
+	margin: 20px 0 0 0;
+}
+
+
+.hide{
+	display: none;
 }
