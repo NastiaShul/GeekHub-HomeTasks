@@ -43,7 +43,7 @@ function Palette() {
 			green: Math.floor(Math.random() * 255),
 			blue: Math.floor(Math.random() * 255)
 		});
-		setCounter((counter) => counter++);
+		setCounter((counter) => ++counter);
 	}
 
 	return (
