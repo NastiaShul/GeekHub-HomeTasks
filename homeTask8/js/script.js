@@ -1,12 +1,12 @@
 
 const form = () => {
 	const form = document.querySelector("form"),
-	firstName = document.querySelector(".first-name"),
-	lastName = document.querySelector(".last-name"),
-	phone = document.querySelector(".phone"),
-	email = document.querySelector(".email"),
-	password = document.querySelector(".password"),
-	confPassword = document.querySelector(".conf-password"),
+	firstName = document.getElementById("first-name"),
+	lastName = document.getElementById("last-name"),
+	phone = document.getElementById("phone"),
+	email = document.getElementById("email"),
+	password = document.getElementById("password"),
+	confPassword = document.getElementById("conf-password"),
 	wrapper = document.querySelector(".wrapper"),
 	modal = document.querySelector(".modal"),
 	submitForm = document.querySelector(".modal-btn");
@@ -67,7 +67,7 @@ const formatPhoneNumber = (phone) => {
 };
 
 const validEmail = (inputField, errorField) => {
-	const regexEmail = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}/i;
+	const regexEmail = /^[a-z0-9\.]+@[a-z]+\.[a-z]{2,3}/i;
 	if (regexEmail.test(inputField.value)) {
 		return true;
 	}
