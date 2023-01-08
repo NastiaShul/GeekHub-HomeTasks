@@ -8,13 +8,13 @@ import "./palette.css";
 
 function Palette() {
 	const [rgbColor, setRgbColor] = useState({ red: 127, green: 127, blue: 127 });
-	const [averageColor, setAvarageColor] = useState({});
+	const [averageColors, setAvarageColors] = useState({ red: [127], green: [127], blue: [127] });
 	const [dominantColor, setDominantColor] = useState("All colors are equal");
 	const [counter, setCounter] = useState(0);
 
 	useEffect(() => {
 		if (counter === 0) {
-			setAvarageColor(rgbColor)
+			// setAvarageColor(rgbColor)
 		} else {
 			const isDominantRed = rgbColor.red > (rgbColor.green + rgbColor.blue);
 			const isDominantGreen = rgbColor.green > (rgbColor.red + rgbColor.blue);
@@ -27,11 +27,14 @@ function Palette() {
 				setDominantColor("blue");
 			}
 
-			setAvarageColor(({ red, green, blue }) => {
+			setAvarageColors(({ red, green, blue }) => {
 				return {
-					red: Math.floor((red + rgbColor.red) / counter),
-					green: Math.floor((green + rgbColor.green) / counter),
-					blue: Math.floor((blue + rgbColor.blue) / counter),
+					// red: Math.floor((red + rgbColor.red) / counter),
+					// green: Math.floor((green + rgbColor.green) / counter),
+					// blue: Math.floor((blue + rgbColor.blue) / counter),
+					red: [...red, rgbColor.red],
+					green: [...green, rgbColor.green],
+					blue: [...blue, rgbColor.blue],
 				}
 			})
 		}
@@ -50,7 +53,7 @@ function Palette() {
 		<div className="palette">
 			<DominantColor dominantColor={dominantColor} />
 			<Background rgbColor={rgbColor} changeColor={changeColor} />
-			<AverageColor averageColor={averageColor} />
+			<AverageColor averageColors={averageColors} />
 		</div>
 	);
 }
