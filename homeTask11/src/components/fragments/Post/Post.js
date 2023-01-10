@@ -16,8 +16,6 @@ export const Post = () => {
 			.then((json) => setPost(json[0]));
 	}, [postId]);
 
-
-	console.log('post', post)
 	return (
 		<div className="posts-block">
 			<User/>

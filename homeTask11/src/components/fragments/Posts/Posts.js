@@ -9,16 +9,12 @@ export const Posts = () => {
 	const [posts, setPosts] = useState([]);
 	const { id } = useParams();
 
-	console.log('id', id);
-
-
 	useEffect(() => {
 		fetch(`https://jsonplaceholder.typicode.com/users/${id}/todos`)
 			.then((response) => response.json())
 			.then((json) => setPosts(json));
 	}, [id]);
 
-	console.log(posts);
 	return (
 		<div className="posts-block">
 			<User/>
@@ -31,10 +27,10 @@ export const Posts = () => {
 								<span className="post-title">{post.title}</span>
 							</Link>
 						</h5>
-						<h9>
+						<h6>
 							<span className="helper">Status: </span> 
 							<span>{post.complited ? "complited" : "uncomplited"}</span>
-						</h9>
+						</h6>
 					</li>
 				</ul>
 			)}
