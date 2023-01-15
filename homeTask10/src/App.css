@@ -40,6 +40,6 @@ input{
 	padding: 7px 15px;
 }
 
-.error-message{
+.FormField__error{
 	color: red;
 }

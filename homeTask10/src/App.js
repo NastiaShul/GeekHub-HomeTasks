@@ -1,14 +1,14 @@
 import "./App.css"
-import { ChangePass } from "./components/ChangePass";
-import {EditUserProfile} from "./components/EditUserProfile"
+import { ChangePassword } from "./components/ChangePass/ChangePass";
+import { EditUserProfile } from "./components/EditUser/EditUserProfile"
+
 function App() {
 	return (
 		<>
-		<ChangePass/>
-		<EditUserProfile/>
+			<ChangePassword/>
+			<EditUserProfile />
 		</>
 	);
 }
-
 export default App;
 
