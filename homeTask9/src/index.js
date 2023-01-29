@@ -4,8 +4,6 @@ import Palette from './components/palette/palette';
 
 import './index.css';
 
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<Palette />

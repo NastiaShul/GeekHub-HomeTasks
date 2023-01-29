@@ -4,11 +4,11 @@ function Background({ rgbColor, changeColor }) {
 	const cssOutPut = `rgb(${rgbColor.red}, ${rgbColor.green}, ${rgbColor.blue})`;
 
 	return (
-			<div 
-				className="square"
-				onClick={changeColor} 
-				style={{ background: cssOutPut }}>
-			</div>
+		<div 
+			className="background"
+			onClick={changeColor} 
+			style={{ background: cssOutPut }}>
+		</div>
 	)
 }
 

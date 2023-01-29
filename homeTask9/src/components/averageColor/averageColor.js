@@ -1,9 +1,11 @@
 import "./averageColor.css";
 
-const getAverage = (averageColors, color) =>
-	Math.floor(averageColors[color].reduce((colorAcc, currentValue) =>
-		colorAcc + currentValue, 0) / averageColors[color].length);
-
+const getAverage = (averageColors, color) => {
+	const num = averageColors[color].reduce((colorAcc, currentValue) => {
+		return colorAcc + currentValue;
+	}, 0);
+	return Math.floor(num / averageColors[color].length);
+};
 
 function AverageColor({ averageColors }) {
 	const red = getAverage(averageColors, 'red');

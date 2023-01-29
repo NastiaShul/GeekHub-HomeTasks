@@ -8,45 +8,27 @@ import "./palette.css";
 
 function Palette() {
 	const [rgbColor, setRgbColor] = useState({ red: 127, green: 127, blue: 127 });
-	const [averageColors, setAvarageColors] = useState({ red: [127], green: [127], blue: [127] });
-	const [dominantColor, setDominantColor] = useState("All colors are equal");
-	const [counter, setCounter] = useState(0);
+	const [averageColors, setAverageColors] = useState({ red: [127], green: [127], blue: [127] });
 
-	useEffect(() => {
-		if (counter === 0) {
-			// setAvarageColor(rgbColor)
-		} else {
-			const isDominantRed = rgbColor.red > (rgbColor.green + rgbColor.blue);
-			const isDominantGreen = rgbColor.green > (rgbColor.red + rgbColor.blue);
+	const isDominantRed = rgbColor.red > (rgbColor.green + rgbColor.blue) / 2;
+	const isDominantGreen = rgbColor.green > (rgbColor.red + rgbColor.blue) / 2;
+	const isDominantBlue = rgbColor.red > (rgbColor.green + rgbColor.red) / 2;
 
-			if (isDominantRed) {
-				setDominantColor("red");
-			} else if (isDominantGreen) {
-				setDominantColor("green");
-			} else {
-				setDominantColor("blue");
-			}
-
-			setAvarageColors(({ red, green, blue }) => {
-				return {
-					// red: Math.floor((red + rgbColor.red) / counter),
-					// green: Math.floor((green + rgbColor.green) / counter),
-					// blue: Math.floor((blue + rgbColor.blue) / counter),
-					red: [...red, rgbColor.red],
-					green: [...green, rgbColor.green],
-					blue: [...blue, rgbColor.blue],
-				}
-			})
-		}
-	}, [rgbColor, counter])
+	const dominantColor = isDominantRed ? "red" : isDominantGreen ? "green" : isDominantBlue ? "blue" : "All colors are equal";
 
 	const changeColor = () => {
-		setRgbColor({
-			red: Math.floor(Math.random() * 255),
-			green: Math.floor(Math.random() * 255),
-			blue: Math.floor(Math.random() * 255)
+		const red = Math.floor(Math.random() * 255),
+			green = Math.floor(Math.random() * 255),
+			blue = Math.floor(Math.random() * 255);
+
+		setRgbColor({red, green, blue});
+		setAverageColors((prevState) => {
+			return {
+				red: [...prevState.red, red],
+				green: [...prevState.green, green],
+				blue: [...prevState.blue, blue],
+			}
 		});
-		setCounter((counter) => ++counter);
 	}
 
 	return (
