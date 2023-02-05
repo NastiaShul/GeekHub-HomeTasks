@@ -12,14 +12,14 @@ const MainPage = () => {
       dispatch(newsActions.resetArticle());
    }, [dispatch]);
 
-   return (
-      <React.Fragment>
-         <Header />
-         <main>
-            <NewsList />
-         </main>
-      </React.Fragment>
-   );
-};
+      return (
+         <React.Fragment>
+            <Header />
+            <main>
+               <NewsList />
+            </main>
+         </React.Fragment>
+      );
+   };
 
-export default MainPage;
+   export default MainPage;

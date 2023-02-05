@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import styles from "./Comment.module.css";
+import styles from "./Comment.module.scss";
 import { fetchSubComments } from "../../store/news-actions";
 import CommentsList from "../../components/CommentList/CommentsList";
 import dateConverter from "../../helpers/dateConverter";

@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "./CommentList.module.css";
+import styles from "./CommentList.module.scss";
 import Comment from "../Comment/Comment";
 
 const CommentsList = ({ comments }) => {

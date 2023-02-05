@@ -17,12 +17,9 @@ body {
    padding: 20px 0;
    width: 655px;
    margin: 0 auto;
-}
-
-@media(max-width: 765px) {
-   #root {
-      width: auto;
-      margin: 0 20px;
+   @media(max-width: 765px) {
+         width: auto;
+         margin: 0 20px;
    }
 }
 
@@ -50,16 +47,15 @@ a {
    text-decoration: none;
    color: inherit;
    outline: none;
-}
+   &:visited {
+      color: #7f788e;
+   }
+   &:hover {
+      opacity: 0.5;
+      transition: 0.3s, ease-in-out, linear;
+      cursor: pointer;
+   }
 
-a:visited {
-   color: #7f788e;
-}
-
-a:hover {
-   opacity: 0.5;
-   transition: 0.3s, ease-in-out, linear;
-   cursor: pointer;
 }
 
 button {

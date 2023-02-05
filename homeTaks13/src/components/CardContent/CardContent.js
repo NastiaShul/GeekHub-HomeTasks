@@ -1,7 +1,7 @@
 import React from "react";
 
 import dateConverter from "../../helpers/dateConverter";
-import styles from "./CardContent.module.css";
+import styles from "./CardContent.module.scss";
 
 const CardContent = (props) => {
    const { title, score, by, time, descendants } = props;

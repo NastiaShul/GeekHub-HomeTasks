@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { fetchNews } from "../../store/news-actions";
-import styles from "./Header.module.css";
+import styles from "./Header.module.scss";
 import Button from "../Button/Button";
 
 const Header = () => {

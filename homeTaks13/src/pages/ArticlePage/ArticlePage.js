@@ -3,7 +3,7 @@ import { useNavigate  } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import styles from "./ArticlePage.css";
+import styles from "./ArticlePage.scss";
 import Article from "../../components/Article/Article";
 import CommentsList from "../../components/CommentList/CommentsList";
 import Preloader from "../../components/Preloader/Preloader";

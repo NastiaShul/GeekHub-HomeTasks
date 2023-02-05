@@ -5,10 +5,8 @@
 
    color: #aaa;
    font-size: 14px;
-}
-
-@media (max-width: 390px) {
-   .column {
-      flex-direction: column;
+   @media (max-width: 390px) {
+         flex-direction: column;
    }
 }
+
