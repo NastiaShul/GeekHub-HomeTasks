@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 
-import styles from "./NewsList.module.css";
+import styles from "./NewsList.module.scss";
 import NewsCard from "../NewsCard/NewsCard";
 import Preloader from "../Preloader/Preloader";
 

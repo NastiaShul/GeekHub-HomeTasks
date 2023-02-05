@@ -1,0 +1,37 @@
+h2{
+   margin: 30px 0 0 0;
+}
+
+p{
+   margin: 0 0 30px 0;
+}
+
+.details {
+   color: #aaa;
+   font-size: 14px;
+}
+
+.text {
+   overflow-wrap: break-word;
+}
+
+.noComment {
+   color: #aaa;
+}
+
+.button {
+   cursor: pointer;
+   &:hover {
+      opacity: 0.8;
+      transition: 0.1s, ease, linear;
+   }
+}
+
+.subCommentsVisible {
+   display: flex;
+   padding-left: 25px;
+}
+
+.subCommentsHidden {
+   display: none;
+}
