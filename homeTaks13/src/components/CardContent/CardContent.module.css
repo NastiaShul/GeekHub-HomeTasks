@@ -1,0 +1,14 @@
+.details {
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-start;
+
+   color: #aaa;
+   font-size: 14px;
+}
+
+@media (max-width: 390px) {
+   .column {
+      flex-direction: column;
+   }
+}
