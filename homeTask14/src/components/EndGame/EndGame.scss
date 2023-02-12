@@ -1,0 +1,29 @@
+.endgame-field {
+   width: 100vw;
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   animation: endgame 1s ease;
+   &__title{
+      font-weight: 700;
+      font-size: 60px;
+      text-align: center;
+      margin: 0 0 15px 0;
+      @media (max-width: 576px) {
+         font-size: 40px;
+      }
+   }
+}
+
+@keyframes endgame {
+0% {
+   transform: scale(1);
+   opacity: 1;
+   }
+   100% {
+   opacity: 0;
+   transform: scale(3);
+   }
+}
