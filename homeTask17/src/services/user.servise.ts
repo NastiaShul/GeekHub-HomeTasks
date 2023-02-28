@@ -42,13 +42,19 @@ export class UserService {
 
    async getPosts(
       author: string,
-   ): Promise<Post[]> {
-      const posts: Post[] = await PostModel.find({ author })
-         .sort({ createdAt: 1 });
-      return posts;
+      limit: number,
+      page: number,
+   ): Promise<{ posts: Post[], total: number }> {
+      const skip = (page - 1) * limit;
+      const countQuery = PostModel.find({ author });
+      const postsQuery = PostModel.find({ author }).sort({ createdAt: 1 });
+      const total = await countQuery.countDocuments();
+      const posts = await postsQuery.skip(skip).limit(limit).exec();
+      return { posts, total };
    }
-}
 
+
+}
 
 export const userService = new UserService();
 

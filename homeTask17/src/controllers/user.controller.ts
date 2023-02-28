@@ -39,9 +39,11 @@ export class UserController {
 
    getPosts = async (req: Request, res: Response) => {
       const { userId } = req.params;
-      const response = await userService.getPosts(userId);
+      const { limit = 10, page = 1 } = req.query;
+      const response = await userService.getPosts(userId, +limit, +page);
       res.send(response);
    };
+
 
 }
 
