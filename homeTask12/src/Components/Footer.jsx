@@ -1,71 +1,45 @@
-import { styled, Typography } from "@mui/material";
-import { Box, Container } from "@mui/system";
+import { Typography, useTheme } from "@mui/material";
+import { Box } from "@mui/system";
 import React from "react";
 
-import fbIcon from "../media/fbicon.png";
-import twitterIcon from "../media/twittericon.png";
-import linkedinIcon from "../media/linkedinicon.png";
+import { colorDefinitions } from "../theme";
+import { CustomContainer, IconBox } from "./atomic";
+
+import facebook from "../media/ic-facebook.png";
+import twitter from "../media/ic-twitter.png";
+import linkedin from "../media/ic-linkdin.png";
 
 const Footer = () => {
-const CustomContainer = styled(Container)(({ theme }) => ({
-	[theme.breakpoints.down("md")]: {
-	flexDirection: "column",
-	textAlign: "center",
-	},
-}));
+   const theme = useTheme();
+   const colors = colorDefinitions(theme.palette.mode);
 
-const IconBox = styled(Box)(({ theme }) => ({
-	display: "flex",
-	alignItems: "center",
-	gap: "1rem",
-	[theme.breakpoints.down("md")]: {
-	justifyContent: "center",
-	},
-}));
+   return (
+      <CustomContainer>
+         <Box>
+            <Typography
+               fontSize="20px"
+               fontWeight="700"
+               marginBottom="10px"
+               color={colors.black.DEFAULT}>
+               Follow us
+            </Typography>
 
-return (
-	<Box sx={{ py: 10 }}>
-	<CustomContainer>
-		<Box>
-			<Typography
-			sx={{
-				fontSize: "20px",
-				color: "#000339",
-				fontWeight: "700",
-				mb: 2,
-			}}
-			>
-			Follow us
-			</Typography>
+            <Typography fontSize="16px"
+               fontWeight="500"
+               marginBottom="10px"
+               color={colors.primary.DEFAULT}
+            >
+               You’ll find all fresh news here.
+            </Typography>
 
-			<Typography
-			sx={{
-				fontSize: "16px",
-				color: "#ccc",
-				fontWeight: "500",
-				mb: 2,
-			}}
-			>
-			You’ll find all fresh news here.
-			</Typography>
-
-			<IconBox>
-			<img src={fbIcon} alt="fbIcon" style={{ cursor: "pointer" }} />
-			<img
-				src={twitterIcon}
-				alt="twitterIcon"
-				style={{ cursor: "pointer" }}
-			/>
-			<img
-				src={linkedinIcon}
-				alt="linkedinIcon"
-				style={{ cursor: "pointer" }}
-			/>
-			</IconBox>
-		</Box>
-	</CustomContainer>
-	</Box>
-);
+            <IconBox>
+               <img src={facebook} alt="facebook" style={{ cursor: "pointer" }} />
+               <img src={twitter} alt="twitterIcon" style={{ cursor: "pointer" }} />
+               <img src={linkedin} alt="linkedinIcon" style={{ cursor: "pointer" }} />
+            </IconBox>
+         </Box>
+      </CustomContainer>
+   );
 };
 
 export default Footer;
