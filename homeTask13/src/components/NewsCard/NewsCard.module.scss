@@ -1,0 +1,18 @@
+.card {
+   padding: 25px;
+   border-radius: 15px;
+   box-shadow: 4px 4px 8px 0px rgba(230, 84, 65, 0.2);
+}
+
+.article {
+   height: 100%;
+}
+
+.details {
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-start;
+
+   color: #aaa;
+   font-size: 14px;
+}
