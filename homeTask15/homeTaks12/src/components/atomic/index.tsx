@@ -1,7 +1,6 @@
 import { Typography, Box, Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-
 const NavLink = styled(Typography)(({ theme }) => ({
    fontSize: "16px",
    color: theme.palette.primary.main,
@@ -78,7 +77,6 @@ const Title = styled(Typography)(({ theme }) => ({
       fontSize: "40px",
    },
 }));
-
 
 const WrapperContainer = styled(Container)<any>(({ theme }) => ({
    backgroundColor: theme.palette.neutral[theme.palette.mode]

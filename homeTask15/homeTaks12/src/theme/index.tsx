@@ -1,5 +1,5 @@
 import { createContext, useState, useMemo } from 'react';
-import { createTheme, PaletteMode } from '@mui/material';
+import { createTheme, PaletteMode, Palette} from '@mui/material';
 
 export interface Colors {
    primary: {
@@ -14,6 +14,13 @@ export interface Colors {
       100?: string;
    };
    accentMain: string;
+}
+
+export interface CustomPalette extends Palette {
+   neutral: {
+      dark: string;
+      light: string;
+   };
 }
 
 export const colorDefinitions = (mode: PaletteMode): Colors => ({
@@ -67,7 +74,7 @@ export const themeSettings = (mode: PaletteMode) => {
                },
             }),
       },
-   };
+   } as { palette: CustomPalette };
 };
 
 interface ColorModeContextProps {

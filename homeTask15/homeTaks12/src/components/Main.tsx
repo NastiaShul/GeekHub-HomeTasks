@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Container, Typography, useTheme } from "@mui/material";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Heroes from "./Heroes";
