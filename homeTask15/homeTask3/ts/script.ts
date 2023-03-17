@@ -1,31 +1,38 @@
 "use strict";
 
 //2
-function mainFunction(arr: any, callback: any) {
-   return callback(arr)
-}
+
+type MainFunctionArrayProp = string | number | { age: number, name: string };
+
+type MainFunction = <T extends MainFunctionArrayProp>(
+   arr: T[],
+   callback: (arr: T[]) => string
+) => string;
+
+const mainFunction: MainFunction = (arr, callback) => {
+   return callback(arr);
+};
 
 function upperFirstLetter(arr: string[]) {
-   return arr.map(item => item.replace(item[0], item[0].toUpperCase())).join('');
+   return arr.map((item) => item.replace(item[0], item[0].toUpperCase())).join(", ");
 }
 
 function multiplyTen(arr: number[]) {
-   return arr.map(item => item * 10).join(", ");
+   return arr.map((item) => item * 10).join(", ");
 }
 
-function dataBase(arr: [{ age: number, name: string }]) {
-   return arr.map(item => item.name + " is " + item.age).join(", ");
+function dataBase(arr: { age: number; name: string }[]) {
+   return arr.map((item) => item.name + " is " + item.age).join(", ");
 }
 
 function reverse(arr: string[]) {
-   return arr.map(item => item.split("").reverse().join("")).join(", ");
+   return arr.map((item) => item.split("").reverse().join("")).join(", ");
 }
 
-console.log(mainFunction(['my', 'name', 'is', 'Vasya'], upperFirstLetter));
+console.log(mainFunction(["my", "name", "is", "Vasya"], upperFirstLetter));
 console.log(mainFunction([10, 20, 30], multiplyTen));
-console.log(mainFunction([{ age: 45, name: 'John' }, { age: 20, name: 'Aaron' }], dataBase));
-console.log(mainFunction(['abc', '123'], reverse));
-
+console.log(mainFunction([{ age: 45, name: "John" }, { age: 20, name: "Aaron" }], dataBase));
+console.log(mainFunction(["abc", "123"], reverse));
 
 //3.1
 interface Rectangle {
@@ -76,25 +83,32 @@ const numerator: Numerator = {
 }
 
 //3.4. 
-const element = {
+
+type ElementType = {
+   height: number;
+   getHeight: () => number;
+};
+
+const element: ElementType = {
    height: 25,
    getHeight: function (): number {
       return this.height;
    }
 };
 
-let getElementHeight = element;
+const getElementHeight: ElementType = element;
 getElementHeight.getHeight();
 
 //4
-let convertToObject = (num: number) => {
+type ConvertToObject = (num: number) => { value: number; isOdd: boolean };
+
+const convertToObject: ConvertToObject = (num) => {
    const obj = {
       value: num,
       isOdd: Boolean(num % 2),
    };
    return obj;
 }
-
 
 //5.1 
 function minus(x: number = 0) {
@@ -113,9 +127,16 @@ function multiplyMaker(y: number) {
 const multiply = multiplyMaker(2);
 
 //5.3 
-let createStr = function (str: string) {
+interface CreateStr {
+   setStr(newStr: string | number | undefined): void;
+   getStr(): string;
+   getStrLength(): number;
+   getStrReverse(): string;
+}
+
+const createStr = function (str: string): CreateStr {
    return {
-      setStr: function (newStr: string): void {
+      setStr(newStr: string | number | undefined): void {
          if (typeof newStr === "number") {
             str = "" + newStr;
          } else if (typeof newStr === "undefined") {
@@ -124,23 +145,32 @@ let createStr = function (str: string) {
             str = newStr;
          }
       },
-
-      getStr: function () :string  {
+      getStr(): string {
          return str;
       },
-
-      getStrLength: function () :number {
+      getStrLength(): number {
          return str.length;
       },
-
-      getStrReverce: function () :string  {
+      getStrReverse(): string {
          return str.split("").reverse().join("");
-      }
-   }
-}
+      },
+   };
+};
 
 //5.4 
-let calc = (() => {
+
+interface Calc {
+   get(): Calc;
+   set(x: number): Calc;
+   add(x: number): Calc;
+   subtract(x: number): Calc;
+   multiply(x: number): Calc;
+   divide(x: number): Calc;
+   pow(x: number): Calc;
+   modulus(x: number): Calc;
+}
+
+const calc: Calc = (() => {
    let num: number = 0;
    const a = {
       get() {
@@ -163,7 +193,7 @@ let calc = (() => {
          num *= x;
          return a;
       },
-      divise(x: number) {
+      divide(x: number) {
          num /= x;
          return a;
       },
@@ -182,10 +212,10 @@ let calc = (() => {
 
 
 //6
-function sum(a: number = 0)  {
+function sum(a: number = 0) {
    return function (b: number = 0) {
-      return function (c: number = 0): number {
+      return function (c: number = 0) {
          return a + b + c;
-      }
-   }
+      };
+   };
 }
